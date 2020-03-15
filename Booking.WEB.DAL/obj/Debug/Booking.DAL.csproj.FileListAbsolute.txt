@@ -1,0 +1,8 @@
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\obj\Debug\Booking.DAL.csprojAssemblyReference.cache
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\bin\Debug\Booking.WEB.DAL.dll
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\bin\Debug\Booking.WEB.DAL.pdb
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\bin\Debug\Dapper.dll
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\bin\Debug\Dapper.xml
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\obj\Debug\Booking.DAL.csproj.CopyComplete
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\obj\Debug\Booking.WEB.DAL.dll
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking.WEB.DAL\obj\Debug\Booking.WEB.DAL.pdb

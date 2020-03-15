@@ -1,0 +1,51 @@
+﻿@model Booking.DAL.Models.Info
+
+@{ if (Model.RouteInfo.Count() == 0)
+    {
+        <p><center><b>Немає потягів за даним маршрутом.</b></center></p>
+    }
+    else
+    {
+        <table class="table  table-striped">
+            <tr>
+                <th>Потяг</th>
+                <th>Маршрут</th>
+                <th>Час відбуття</th>
+                <th>Час прибуття</th>
+                <th>Тривалість</th>
+                <th>Інформація про вагони</th>
+            </tr>
+
+            @foreach (var item in Model.RouteInfo)
+            {
+                <tr>
+                    <td>
+                       № @item.TrainName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.DepartureTime
+                    </td>
+                    <td>
+                        @item.ArrivalTime
+                    </td>
+                    <td>
+                        @item.Duration
+                    </td>
+                    <td>
+                        @foreach (var car in item.CarriageInfos)
+                        {
+                        <p> @car.Name: @car.FreeSeats</p> <br />
+
+                        }
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    }
+}
+

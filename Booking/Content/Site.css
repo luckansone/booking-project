@@ -1,0 +1,80 @@
+﻿
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: Tahoma, Geneva, sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+#mainli {
+    font-size: 30px;
+}
+
+
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+    font-family: Tahoma, Geneva, sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+
+
+.btn {
+    background-color: #152F62;
+    border-radius:50px;
+}
+
+.navbar {
+    background-color: #152F62;
+    height:65px;
+}
+
+.welcome {
+    width: 100%;
+    height: 500px;
+    background-color: #E8F0FF;
+    text-align: center;
+    border-radius: 18px 18px 18px 18px;
+}
+
+.searchform{
+    margin-left:80px;
+}
+
+#shadow {
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

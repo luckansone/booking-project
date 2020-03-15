@@ -1,0 +1,79 @@
+﻿@model Booking.WEB.ViewModels.SearchTrainsViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+
+    <div class="welcome" id="shadow">
+
+
+        <div class="searchform">
+            @using (Ajax.BeginForm("SearchTrains", new AjaxOptions { UpdateTargetId = "results" }))
+            {
+                <br />
+                <br />
+                <br />
+                <br />
+                @Html.AntiForgeryToken()
+
+
+
+
+                <div class="form-horizontal center-block">
+                    <table width="100%" align="center">
+                        <tr>
+                            <td>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FromStation, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.FromStation, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.FromStation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ToStation, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.ToStation, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ToStation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DateOfDeparture, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.DateOfDeparture, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DateOfDeparture, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TimeOfDeparture, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.TimeOfDeparture, Model.times, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TimeOfDeparture, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <div class="form-group">
+                        <center><input type="submit" value="Знайти" class="btn btn-primary btn-lg btn-block" /></center>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <br />
+    <div id="results"></div>
+
