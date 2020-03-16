@@ -20,7 +20,7 @@ namespace Booking.WEB.ViewModels
 
         
         [DataType(DataType.Date)]
-        [Display(Name = "Оберіть дату")]
+        [Display(Name = "Дата")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Введіть дані.")]
         public DateTime DateOfDeparture { get; set; }

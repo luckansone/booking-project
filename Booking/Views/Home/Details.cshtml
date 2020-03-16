@@ -1,0 +1,60 @@
+﻿@model Booking.ViewModels.InfoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<div>
+    <table class="table table-hover">
+        <thead class="thead-style">
+            <tr>
+                <th>Номер поїзда</th>
+                <th>Звідки/Куди</th>
+                <th>Час відбуття</th>
+                <th>Час прибуття</th>
+                <th>Тривалість</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                №@Model.TrainInfo.TrainName
+            </td>
+            <td>
+                @Model.TrainInfo.Description
+            </td>
+            <td>
+                @Model.TrainInfo.DepartureTime
+            </td>
+            <td>
+                @Model.TrainInfo.ArrivalTime
+            </td>
+            <td>
+                @Model.TrainInfo.Duration
+            </td>
+        </tr>
+        <tr>
+            @foreach (var car in Model.TrainInfo.CarInfoViewModels.FindAll(x=>x.Name.Equals(ViewBag.CarType)))
+            {
+            <td>
+                @car.Number
+                @*@Ajax.ActionLink(@car.Number.ToString(), "", new AjaxOptions { UpdateTargetId = "results" })*@
+                @*<img src="~/img/carriage.png" style="width:40px; height:50px" />*@
+                <img src="https://booking.uz.gov.ua/i/img/desktop/wagon.png"/>
+
+            </td>
+            }
+        </tr>
+    </table>
+   
+</div>
+<p>
+    @Html.ActionLink("Назад", "Search", null, new { @class = "btn btn-primary btn-lg" })
+</p>

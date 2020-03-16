@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Booking.DAL.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Booking.DAL.Models
+namespace Booking.WEB.DAL.Models
 {
-    public class Info
+    public class TrainInfo
     {
         public List<RouteInfo> RouteInfo { get; set; }
-        public RouteInfo TrainInfo { get; set; }
-        public Info()
+        public TrainInfo()
         {
             RouteInfo = new List<RouteInfo>();
         }

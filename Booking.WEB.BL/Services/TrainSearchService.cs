@@ -24,5 +24,10 @@ namespace Booking.BL.Services
         {
             return unitOfWork.infoRepository.SearchItems(model);
         }
+
+        public Info SearchCarriage(int trainId, int routeId)
+        {
+            return unitOfWork.infoRepository.SearchCarriages(trainId, routeId);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Booking.DAL.Models;
 using Booking.Interfaces.Mapping;
+using Booking.ViewModels;
 using Booking.WEB.BL.Interfaces;
 using Booking.WEB.ViewModels;
 using System;
@@ -30,6 +31,15 @@ namespace Booking.Controllers
             return View(model);
         }
 
+
+        public ActionResult Details(int trainId, int routeId, string carType)
+        {
+            ViewBag.CarType = carType;
+            var Info = trainSearchService.SearchCarriage(trainId, routeId);
+            var items = mapperControl.GetInfoViewModelByInfo(Info);
+            return View(items);
+        }
+
         [HttpPost]
         public ActionResult SearchTrains(SearchTrainsViewModel model)
         {
@@ -40,8 +50,8 @@ namespace Booking.Controllers
             
             SearchTrainsModel trainsModel = mapperControl.GetSearchModelByModelView(model);
             var Info = trainSearchService.SearchTrains(trainsModel);
-            //var items = mapperControl.GetInfoViewModelByInfo(Info);
-            return PartialView(Info);
+            var items = mapperControl.GetInfoViewModelByInfo(Info);
+            return PartialView(items);
         }
     }
 }

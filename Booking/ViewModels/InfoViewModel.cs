@@ -7,13 +7,12 @@ namespace Booking.ViewModels
 {
     public class InfoViewModel
     {
-        public List<RouteInfoViewModel> RouteInfoViewModels { get; set; }
-        public List<CarInfoViewModel> CarInfoViewModels { get; set; }
+        public List<RouteInfoViewModel> RouteInfo { get; set; }
+        public RouteInfoViewModel TrainInfo { get; set; }
 
         public InfoViewModel()
         {
-            RouteInfoViewModels = new List<RouteInfoViewModel>();
-            CarInfoViewModels = new List<CarInfoViewModel>();
+            RouteInfo = new List<RouteInfoViewModel>();
         }
     }
 }

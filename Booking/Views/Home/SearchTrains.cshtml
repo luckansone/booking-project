@@ -1,4 +1,7 @@
-﻿@model Booking.DAL.Models.Info
+﻿@model Booking.ViewModels.InfoViewModel
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
 @{ if (Model.RouteInfo.Count() == 0)
     {
@@ -6,21 +9,24 @@
     }
     else
     {
-        <table class="table  table-striped">
-            <tr>
-                <th>Потяг</th>
-                <th>Маршрут</th>
-                <th>Час відбуття</th>
-                <th>Час прибуття</th>
-                <th>Тривалість</th>
-                <th>Інформація про вагони</th>
-            </tr>
+        <table class="table table-hover">
+            <thead class="thead-style">
+                <tr>
+                    <th>Номер поїзда</th>
+                    <th>Звідки/Куди</th>
+                    <th>Час відбуття</th>
+                    <th>Час прибуття</th>
+                    <th>Тривалість</th>
+                    <th>Вільні місця</th>
+                </tr>
+            </thead>
 
             @foreach (var item in Model.RouteInfo)
             {
+             
                 <tr>
                     <td>
-                       № @item.TrainName
+                        №@item.TrainName
                     </td>
                     <td>
                         @item.Description
@@ -35,10 +41,10 @@
                         @item.Duration
                     </td>
                     <td>
-                        @foreach (var car in item.CarriageInfos)
+                        @foreach (var car in item.CarriageFreeInfos)
                         {
-                        <p> @car.Name: @car.FreeSeats</p> <br />
-
+                            @Html.ActionLink( car.Name+":"+car.FreeSeats, "Details", new { trainId = item.TrainId, routeId = item.RouteId, carType = car.Name}, new { @class = "btn btn-primary btn-lg btn-block fixedbuttonsize" })<br />
+                            
                         }
                     </td>
 

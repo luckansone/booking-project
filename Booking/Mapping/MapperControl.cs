@@ -5,6 +5,7 @@ using AutoMapper;
 using Booking.DAL.Models;
 using Booking.Interfaces.Mapping;
 using Booking.ViewModels;
+using Booking.WEB.DAL.Models;
 using Booking.WEB.ViewModels;
 
 namespace Booking.WEB.Mapping
@@ -23,14 +24,15 @@ namespace Booking.WEB.Mapping
                     .ForMember("DepartureDate", opt => opt
                     .MapFrom(c => Convert.ToDateTime(c.DateOfDeparture.ToString().Replace("0:00:00", c.TimeOfDeparture))));
 
-                
-                //cfg.CreateMap<Info, InfoViewModel>()
-                //    .ForMember("CarInfoViewModels", opt => opt.MapFrom(c=>c.CarInfo))
-                //    .ForMember("RouteInfoViewModels", opt=> opt.MapFrom(c=>c.RouteInfo));
+                cfg.CreateMap<ReservedSeat, ReservedSeatViewModel>();
+                cfg.CreateMap<CarriageInfo, CarInfoViewModel>();
+                cfg.CreateMap<CarriageFreeSeatsInfo, CarFreeInfoViewModel>();
+                cfg.CreateMap<RouteInfo, RouteInfoViewModel>()
+                .ForMember("CarriageFreeInfos", opt => opt.MapFrom(c => c.CarriageFreeSeatsInfos))
+                .ForMember("CarInfoViewModels", opt => opt.MapFrom(c => c.CarriageInfos));
 
-                cfg.CreateMap<InfoViewModel, Info>();
-
-
+                cfg.CreateMap<Info, InfoViewModel>();
+                 
 
                 cfg.AllowNullCollections = true;
             });

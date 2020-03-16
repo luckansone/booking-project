@@ -2999,7 +2999,7 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.active:hover > td,
 .table-hover > tbody > tr:hover > .active,
 .table-hover > tbody > tr.active:hover > th {
-    background-color: #e8e8e8;
+    background-color: #E8F0FF;
 }
 
 .table > thead > tr > td.success,
@@ -3227,7 +3227,7 @@ output {
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
+    background-color: white;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -3266,7 +3266,7 @@ output {
     .form-control[disabled],
     .form-control[readonly],
     fieldset[disabled] .form-control {
-        background-color: #eee;
+        background-color: white;
         opacity: 1;
     }
 
