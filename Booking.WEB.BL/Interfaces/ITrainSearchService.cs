@@ -10,5 +10,7 @@ namespace Booking.WEB.BL.Interfaces
     public interface ITrainSearchService<T, M>
     {
         T SearchTrains(M model);
+
+        T SearchCarriage(int trainId, int routeId);
     }
 }
