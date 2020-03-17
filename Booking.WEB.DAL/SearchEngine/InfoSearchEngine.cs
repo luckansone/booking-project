@@ -3,6 +3,7 @@ using Booking.DAL.Models;
 using Booking.WEB.DAL.Interfaces;
 using Booking.WEB.DAL.Models;
 using Dapper;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -45,29 +46,29 @@ namespace Booking.DAL.SearchEngine
             return Info;
         }
 
-        public Info SearchCarriages(int trainId, int routeId)
+        public List<CarriageInfo> SearchCarriages(int trainId)
         {
             string proc = "GetTrainInfo";
+
+            List<CarriageInfo> info = new List<CarriageInfo>();
             using (IDbConnection conn = _context.GetConnection())
             {
-                using(var multi = conn.QueryMultiple(proc, new { @TrainId = trainId, @RouteId = routeId}, commandType: CommandType.StoredProcedure))
+                using(var multi = conn.QueryMultiple(proc, new { @TrainId = trainId}, commandType: CommandType.StoredProcedure))
                 {
-                    Info.TrainInfo = multi.Read<RouteInfo>().AsList().First();
                     var carriageInfo = multi.Read<CarriageInfo>().AsList();
                     var resersedSeats = multi.Read<ReservedSeat>().AsList();
 
                     foreach(var car in carriageInfo)
                     {
-                        foreach(var seat in resersedSeats.FindAll(x=>x.CarriageId.Equals(car.CarriageId)))
+                        foreach(var seat in resersedSeats.FindAll(x => x.CarriageId.Equals(car.CarriageId)))
                         {
                             car.ReservedSeats.Add(seat);
                         }
-                        Info.TrainInfo.CarriageInfos.Add(car);
+                        info.Add(car);
                     }
-                    
                 }
             }
-            return Info;
+            return info;
         }
     }
 }

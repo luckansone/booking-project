@@ -12,6 +12,7 @@ namespace Booking.ViewModels
         public string Name { get; set; }
         public int Number { get; set; }
         public int CountOfSeats { get; set; }
+        public int FreeSeats { get; set; }
         public List<ReservedSeatViewModel> ReservedSeats { get; set; }
 
         public CarInfoViewModel()

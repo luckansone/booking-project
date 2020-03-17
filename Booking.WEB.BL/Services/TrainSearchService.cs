@@ -2,7 +2,9 @@
 using Booking.DAL.Models;
 using Booking.WEB.BL.Interfaces;
 using Booking.WEB.DAL.Interfaces;
+using Booking.WEB.DAL.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Booking.BL.Services
 {
@@ -25,9 +27,9 @@ namespace Booking.BL.Services
             return unitOfWork.infoRepository.SearchItems(model);
         }
 
-        public Info SearchCarriage(int trainId, int routeId)
+        public List<CarriageInfo> SearchCarriages(int trainId)
         {
-            return unitOfWork.infoRepository.SearchCarriages(trainId, routeId);
+            return unitOfWork.infoRepository.SearchCarriages(trainId);
         }
     }
 }

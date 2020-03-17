@@ -40,7 +40,10 @@ namespace Booking.WEB.Mapping
             mapper = new Mapper(config);
         }
 
-
+        public List<CarInfoViewModel> GetCarModelByCar(List<CarriageInfo> model)
+        {
+            return mapper.Map<List<CarriageInfo>, List<CarInfoViewModel>>(model);
+        }
         public InfoViewModel GetInfoViewModelByInfo(Info model)
         {
             return mapper.Map<Info, InfoViewModel>(model);
