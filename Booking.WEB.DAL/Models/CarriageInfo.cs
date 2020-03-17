@@ -13,6 +13,7 @@ namespace Booking.WEB.DAL.Models
         public string Name { get; set; }
         public int Number { get; set; }
         public int CountOfSeats { get; set; }
+        public int FreeSeats { get; set; }
         public List<ReservedSeat> ReservedSeats { get; set; }
 
         public CarriageInfo()

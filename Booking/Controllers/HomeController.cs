@@ -15,10 +15,12 @@ namespace Booking.Controllers
     {
         private readonly ITrainSearchService<Info, SearchTrainsModel> trainSearchService;
         private readonly IMapperControl mapperControl;
+        private InfoViewModel InfoItems { get; set; }
         public HomeController(ITrainSearchService<Info, SearchTrainsModel> trainSearchService, IMapperControl mapperControl)
         {
             this.trainSearchService = trainSearchService;
             this.mapperControl = mapperControl;
+            InfoItems = new InfoViewModel();
         }
 
         public ActionResult Index()
@@ -32,12 +34,23 @@ namespace Booking.Controllers
         }
 
 
-        public ActionResult Details(int trainId, int routeId, string carType)
+        public ActionResult Details(int trainId, string carType)
         {
             ViewBag.CarType = carType;
-            var Info = trainSearchService.SearchCarriage(trainId, routeId);
-            var items = mapperControl.GetInfoViewModelByInfo(Info);
-            return View(items);
+         
+            InfoItems.RouteInfo = TempData["InfoItems"] as List<RouteInfoViewModel>;
+           
+            foreach(var route in InfoItems.RouteInfo)
+            {
+                if (route.TrainId == trainId)
+                {
+                    InfoItems.TrainInfo = route;
+                    var carriages = trainSearchService.SearchCarriages(trainId);
+                    InfoItems.TrainInfo.CarInfoViewModels = mapperControl.GetCarModelByCar(carriages);
+                }
+            }
+
+            return View(InfoItems.TrainInfo);
         }
 
         [HttpPost]
@@ -50,8 +63,9 @@ namespace Booking.Controllers
             
             SearchTrainsModel trainsModel = mapperControl.GetSearchModelByModelView(model);
             var Info = trainSearchService.SearchTrains(trainsModel);
-            var items = mapperControl.GetInfoViewModelByInfo(Info);
-            return PartialView(items);
+            InfoItems = mapperControl.GetInfoViewModelByInfo(Info);
+            TempData["InfoItems"] = InfoItems.RouteInfo;
+            return PartialView(InfoItems);
         }
     }
 }
