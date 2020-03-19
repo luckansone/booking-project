@@ -42,17 +42,36 @@ namespace Booking.Controllers
             CarInfoViewModels = TempData["TrainInfo"] as List<CarInfoViewModel>;
             CarInfoViewModel model = new CarInfoViewModel();
             ViewBag.TrainInfo = CarInfoViewModels;
+            string viewName = String.Empty;
 
-            foreach(var car in CarInfoViewModels)
+            foreach (var car in CarInfoViewModels)
             {
                 if(car.CarriageId == carId)
                 {
                     model = car;
+                    CheckCarType(model.Name, ref viewName);
+                    break;
                 }
             }
-            return PartialView(model);
+            return PartialView(viewName, model);
         }
 
+        public void CheckCarType(string carType, ref string viewName)
+        {
+            switch (carType)
+            {
+                case "Плацкарт":
+                    {
+                        viewName = "SeatPostCar";
+                        break;
+                    }
+                case "Купе":
+                    {
+                        viewName = "CompartmentCar";
+                        break;
+                    }
+            }
+        }
         public ActionResult Details(int trainId, string carType)
         {
             ViewBag.CarType = carType;
@@ -67,6 +86,7 @@ namespace Booking.Controllers
                     InfoItems.TrainInfo = route;
                     var carriages = trainSearchService.SearchCarriages(trainId);
                     InfoItems.TrainInfo.CarInfoViewModels = mapperControl.GetCarModelByCar(carriages);
+                    break;
                 }
             }
             TempData["TrainInfo"] = InfoItems.TrainInfo.CarInfoViewModels;
