@@ -11,9 +11,9 @@
 
 <style>
     .wagonborder {
-        display:table;
-        width: 100%;
-        height: 190px;
+        width: 95%;
+        height: 160px;
+        position:relative !important;
         border-style: solid;
         border-width: 5px;
         background-color: none;
@@ -26,41 +26,41 @@
         background-color: #152F62;
         width: 35px;
         height: 35px;
-        position: relative !important;
+        position: absolute !important;
         text-align: center;
-        top: 50px;
-        margin-top: 8px;
+        top: 35px;
+        margin-top: 20px;
         margin-left: 15px;
-        padding-top: 2px;
-        padding-left: 5px;
         color: #E8F0FF;
     }
 
-    .place {
+    .evenplace {
         display: inline-block !important;
         background-color: #152F62;
         width: 35px;
         height: 35px;
-        position: relative !important;
+        position: absolute !important;
         text-align: center;
-        top: 10px;
+        top: 5px;
         margin-top: 8px;
         margin-left: 15px;
-        padding-top: 2px;
-        padding-left: 5px;
         color: #E8F0FF;
     }
 
     .wall{
-        height:35px; 
-        display:inline-block;
+        height:90px; 
+        display:inline-block !important;
         border-left: 3px solid #152F62;
-        top: 10px;
-        margin-top: 8px;
+        position: absolute !important;
         margin-left: 30px;
-        padding-top: 2px;
-        padding-left: 5px;
     }
+
+    .toilet{
+        display:inline-block !important;
+        position: absolute !important;
+        top:10px;
+    }
+
    
 </style>
 
@@ -68,35 +68,35 @@
 
 <div class="wagonborder">
     @{
-
-        int left = 70;
+        int left = 48;
+        string leftpx = String.Format("{0}px", left);
+        <div class="wall" style="left:5px"></div>
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:40px" class="toilet" />
+        <div class="wall" style="left:@leftpx"></div>
+        string leftpxwall;
+        left = 70;
         for (int i = 1; i <= Model.CountOfSeats; i += 2)
         {
-            string leftpx = String.Format("{0}px", left);
-            string leftpx2 = String.Format("{0}px", left + 5);
+            leftpx = String.Format("{0}px", left);
+            leftpxwall = String.Format("{0}px", left + 25);
             int a = i + 1;
 
-            <div class="place" style="left:@leftpx; "> @a</div>
+            <div class="evenplace" style="left:@leftpx; "> @a</div>
             <div class="oddplace" style="left:@leftpx; "> @i</div>
 
-            left = left + 5;
+            if (a % 4 == 0)
+            {
+                <div class="wall" style="left:@leftpxwall"></div>
+            }
+
+            left = left + 50;
 
         }
+
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:980px" class="toilet" />
+        <div class="wall" style="left:988px"></div>
         <br />
-        @*left = 70;
-        for (int i = 1; i <= Model.CountOfSeats; i += 4)
-        {
 
-            string leftpx = String.Format("{0}px", left);
-            string leftpx2 = String.Format("{0}px", left + 5);
-            string leftpx3 = String.Format("{0}px", left + 7.5);
-            int a = i + 2;
-
-            <div class="place" style="left:@leftpx; "> @i</div>
-            <div class="place" style="left:@leftpx2; "> @a</div>
-
-            left = left + 10;
-        }*@
     }
 </div>
 
