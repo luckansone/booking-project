@@ -15,12 +15,16 @@ namespace Booking.Controllers
     {
         private readonly ITrainSearchService<Info, SearchTrainsModel> trainSearchService;
         private readonly IMapperControl mapperControl;
+        private readonly ICityService cityService;
         private InfoViewModel InfoItems { get; set; }
-        public HomeController(ITrainSearchService<Info, SearchTrainsModel> trainSearchService, IMapperControl mapperControl)
+        private List<CarInfoViewModel> CarInfoViewModels { get; set; }
+        public HomeController(ITrainSearchService<Info, SearchTrainsModel> trainSearchService, IMapperControl mapperControl, ICityService cityService)
         {
             this.trainSearchService = trainSearchService;
             this.mapperControl = mapperControl;
+            this.cityService = cityService;
             InfoItems = new InfoViewModel();
+            CarInfoViewModels = new List<CarInfoViewModel>();
         }
 
         public ActionResult Index()
@@ -33,13 +37,29 @@ namespace Booking.Controllers
             return View(model);
         }
 
+        public ActionResult CompartmentCar(int carId)
+        {
+            CarInfoViewModels = TempData["TrainInfo"] as List<CarInfoViewModel>;
+            CarInfoViewModel model = new CarInfoViewModel();
+            ViewBag.TrainInfo = CarInfoViewModels;
+
+            foreach(var car in CarInfoViewModels)
+            {
+                if(car.CarriageId == carId)
+                {
+                    model = car;
+                }
+            }
+            return PartialView(model);
+        }
 
         public ActionResult Details(int trainId, string carType)
         {
             ViewBag.CarType = carType;
          
             InfoItems.RouteInfo = TempData["InfoItems"] as List<RouteInfoViewModel>;
-           
+            ViewBag.InfoItems = InfoItems.RouteInfo;
+
             foreach(var route in InfoItems.RouteInfo)
             {
                 if (route.TrainId == trainId)
@@ -49,7 +69,7 @@ namespace Booking.Controllers
                     InfoItems.TrainInfo.CarInfoViewModels = mapperControl.GetCarModelByCar(carriages);
                 }
             }
-
+            TempData["TrainInfo"] = InfoItems.TrainInfo.CarInfoViewModels;
             return View(InfoItems.TrainInfo);
         }
 
@@ -66,6 +86,16 @@ namespace Booking.Controllers
             InfoItems = mapperControl.GetInfoViewModelByInfo(Info);
             TempData["InfoItems"] = InfoItems.RouteInfo;
             return PartialView(InfoItems);
+        }
+
+
+        public JsonResult AutoСompleteSearch(string term)
+        {
+            var cities = cityService.GetCities().ToList()
+                .Where(x => x.Name.Contains(term))
+                .Select(x => new { value = x.Name });
+
+            return Json(cities, JsonRequestBehavior.AllowGet);
         }
     }
 }
