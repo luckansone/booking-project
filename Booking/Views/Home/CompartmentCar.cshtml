@@ -1,0 +1,102 @@
+﻿@model Booking.ViewModels.CarInfoViewModel
+
+@{
+    ViewBag.Title = "CarInfoViewModel";
+    TempData["TrainInfo"] = ViewBag.TrainInfo;
+
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+<style>
+    .wagonborder {
+        display:table;
+        width: 100%;
+        height: 190px;
+        border-style: solid;
+        border-width: 5px;
+        background-color: none;
+        border-color: #152F62;
+        border-radius: 18px 18px 18px 18px;
+    }
+
+    .oddplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: relative !important;
+        text-align: center;
+        top: 50px;
+        margin-top: 8px;
+        margin-left: 15px;
+        padding-top: 2px;
+        padding-left: 5px;
+        color: #E8F0FF;
+    }
+
+    .place {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: relative !important;
+        text-align: center;
+        top: 10px;
+        margin-top: 8px;
+        margin-left: 15px;
+        padding-top: 2px;
+        padding-left: 5px;
+        color: #E8F0FF;
+    }
+
+    .wall{
+        height:35px; 
+        display:inline-block;
+        border-left: 3px solid #152F62;
+        top: 10px;
+        margin-top: 8px;
+        margin-left: 30px;
+        padding-top: 2px;
+        padding-left: 5px;
+    }
+   
+</style>
+
+
+
+<div class="wagonborder">
+    @{
+
+        int left = 70;
+        for (int i = 1; i <= Model.CountOfSeats; i += 2)
+        {
+            string leftpx = String.Format("{0}px", left);
+            string leftpx2 = String.Format("{0}px", left + 5);
+            int a = i + 1;
+
+            <div class="place" style="left:@leftpx; "> @a</div>
+            <div class="oddplace" style="left:@leftpx; "> @i</div>
+
+            left = left + 5;
+
+        }
+        <br />
+        @*left = 70;
+        for (int i = 1; i <= Model.CountOfSeats; i += 4)
+        {
+
+            string leftpx = String.Format("{0}px", left);
+            string leftpx2 = String.Format("{0}px", left + 5);
+            string leftpx3 = String.Format("{0}px", left + 7.5);
+            int a = i + 2;
+
+            <div class="place" style="left:@leftpx; "> @i</div>
+            <div class="place" style="left:@leftpx2; "> @a</div>
+
+            left = left + 10;
+        }*@
+    }
+</div>
+

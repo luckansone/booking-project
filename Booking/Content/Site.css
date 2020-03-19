@@ -60,12 +60,21 @@
     font-size: 20px;
 }
 
+.wagonborder {
+    width: 100%;
+    height: 300px;
+    border-style: solid;
+    border-width: 5px;
+    background-color: none;
+    border-color: #152F62;
+    border-radius: 18px 18px 18px 18px;
+}
 
 .btn {
     background-color: #152F62;
-    border-radius:50px;
-    font-size:20px;
-    align-content:center;
+    border-radius: 50px;
+    font-size: 20px;
+    align-content: center;
 }
 
 .thead-style {

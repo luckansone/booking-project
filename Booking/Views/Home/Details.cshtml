@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Details";
-    List<Booking.ViewModels.RouteInfoViewModel> a = new List<Booking.ViewModels.RouteInfoViewModel>();
-    a.Add(Model);
-    TempData["InfoItems"] = a;
+    //List<Booking.ViewModels.RouteInfoViewModel> routeInfo = new List<Booking.ViewModels.RouteInfoViewModel>();
+    //routeInfo.Add(Model);
+    //TempData["InfoItems"] = routeInfo;
+    TempData["InfoItems"] = ViewBag.InfoItems;
 }
 
 <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
@@ -47,6 +48,7 @@
             <td>
                 @foreach (var car in Model.CarriageFreeInfos)
                 {
+
                     @Html.ActionLink(car.Name + ":" + car.FreeSeats, "Details", new { trainId = car.TrainId, carType = car.Name }, new { @class = "btn btn-primary btn-lg btn-block fixedbuttonsize" })<br />
                 }
             </td>
@@ -56,22 +58,22 @@
             <th>Тип вагона - @ViewBag.CarType</th>
         </tr>
         <tr>
-
             @foreach (var car in Model.CarInfoViewModels.FindAll(x => x.Name.Equals(ViewBag.CarType)))
             {
                 <td>
-                    @car.Number <br />
-                    Вільні місця: @car.FreeSeats <br />
-                    @*@Ajax.ActionLink(@car.Number.ToString(), "", new ArjaxOptions { UpdateTargetId = "results" })*@
-                    @*<img src="~/img/carriage.png" style="width:40px; height:50px" />*@
-                    <img src="https://booking.uz.gov.ua/i/img/desktop/wagon.png" />
 
+                    @Ajax.ActionLink(@car.Number.ToString(), "CompartmentCar", new { carId = car.CarriageId }, new AjaxOptions { UpdateTargetId = "carriageInfo" })
+                    Вільні місця: @car.FreeSeats <br />
+                    <img src="https://booking.uz.gov.ua/i/img/desktop/wagon.png" />
                 </td>
             }
         </tr>
     </table>
-
+    <div id="carriageInfo">
+     
+    </div>
 </div>
+<br />
 <p>
     @Html.ActionLink("Назад", "Search", null, new { @class = "btn btn-primary btn-lg" })
 </p>
