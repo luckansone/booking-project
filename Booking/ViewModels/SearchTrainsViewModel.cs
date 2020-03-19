@@ -18,11 +18,9 @@ namespace Booking.WEB.ViewModels
         [Required(ErrorMessage ="Введіть дані.")]
         public string ToStation { get; set; }
 
-        
-        [DataType(DataType.Date)]
         [Display(Name = "Дата")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "Введіть дані.")]
+        [Required]
         public DateTime DateOfDeparture { get; set; }
 
         
