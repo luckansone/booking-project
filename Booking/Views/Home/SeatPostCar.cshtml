@@ -1,7 +1,6 @@
 ﻿@model Booking.ViewModels.CarInfoViewModel
 
 @{
-    ViewBag.Title = "CarInfoViewModel";
     TempData["TrainInfo"] = ViewBag.TrainInfo;
 
 }
@@ -12,8 +11,8 @@
 <style>
     .wagonborder {
         width: 95%;
-        height: 160px;
-        position:relative !important;
+        height: 200px;
+        position: relative !important;
         border-style: solid;
         border-width: 5px;
         background-color: none;
@@ -47,21 +46,41 @@
         color: #E8F0FF;
     }
 
-    .wall{
-        height:98px; 
-        display:inline-block !important;
+    .wall {
+        height: 98px;
+        display: inline-block !important;
         border-left: 3px solid #152F62;
         position: absolute !important;
         margin-left: 30px;
     }
 
-    .toilet{
-        display:inline-block !important;
+     .lowwall {
+        height: 50px;
+        display: inline-block !important;
+        border-left: 3px solid #152F62;
         position: absolute !important;
-        top:10px;
+        margin-left: 30px;
+        top:140px;
     }
 
-   
+    .toilet {
+        display: inline-block !important;
+        position: absolute !important;
+        top: 10px;
+    }
+
+    .lowplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: absolute !important;
+        text-align: center;
+        top: 138px;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #E8F0FF;
+    }
 </style>
 
 
@@ -75,7 +94,7 @@
         <div class="wall" style="left:@leftpx"></div>
         string leftpxwall;
         left = 70;
-        for (int i = 1; i <= Model.CountOfSeats; i += 2)
+        for (int i = 1; i <= Model.CountOfSeats - 18; i += 2)
         {
             leftpx = String.Format("{0}px", left);
             leftpxwall = String.Format("{0}px", left + 25);
@@ -93,10 +112,31 @@
 
         }
 
+        left = 48;
+        leftpx = String.Format("{0}px", left);
+        <div class="lowwall" style="left:5px"></div>
+        <div class="lowwall" style="left:@leftpx"></div>
+        left = 70;
+        for (int i = Model.CountOfSeats; i > 36; i--)
+        {
+            leftpx = String.Format("{0}px", left);
+            leftpxwall = String.Format("{0}px", left + 25);
+            int a = i + 1;
+
+            <div class="lowplace" style="left:@leftpx; "> @a</div>
+            if (i % 2 != 0)
+            {
+                <div class="lowwall" style="left:@leftpxwall"></div>
+            }
+
+
+            left = left + 50;
+        }
+
         <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:980px" class="toilet" />
         <div class="wall" style="left:988px"></div>
+        <div class="lowwall" style="left:988px"></div>
         <br />
 
     }
 </div>
-
