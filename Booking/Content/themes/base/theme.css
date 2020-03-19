@@ -15,8 +15,8 @@
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 1em;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 15px;
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
@@ -25,8 +25,10 @@
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 1em;
+	 font-family: Tahoma, Geneva, sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    font-size: 15px;
 }
 .ui-widget.ui-widget-content {
 	border: 1px solid #c5c5c5;
