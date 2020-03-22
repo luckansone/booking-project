@@ -1,0 +1,147 @@
+﻿@model Booking.ViewModels.CarInfoViewModel
+
+@{
+    TempData["TrainInfo"] = ViewBag.TrainInfo;
+
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+<style>
+    .wagonborder {
+        width: 95%;
+        height: 235px;
+        position: relative !important;
+        border-style: solid;
+        border-width: 5px;
+        background-color: none;
+        border-color: #152F62;
+        border-radius: 18px 18px 18px 18px;
+    }
+
+    .oddplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: absolute !important;
+        text-align: center;
+        top: 35px;
+        margin-top: 20px;
+        margin-left: 15px;
+        color: #E8F0FF;
+    }
+
+    .evenplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: absolute !important;
+        text-align: center;
+        top: 5px;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #E8F0FF;
+    }
+
+    .wall {
+        height: 98px;
+        display: inline-block !important;
+        border-left: 3px solid #152F62;
+        position: absolute !important;
+        margin-left: 30px;
+    }
+
+    .lowwall {
+        height: 50px;
+        display: inline-block !important;
+        border-left: 3px solid #152F62;
+        position: absolute !important;
+        margin-left: 30px;
+        top: 140px;
+    }
+
+    .toilet {
+        display: inline-block !important;
+        position: absolute !important;
+        top: 10px;
+    }
+
+    .evenlowplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: absolute !important;
+        text-align: center;
+        top: 128px;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #E8F0FF;
+    }
+
+    .oddlowplace {
+        display: inline-block !important;
+        background-color: #152F62;
+        width: 35px;
+        height: 35px;
+        position: absolute !important;
+        text-align: center;
+        top: 168px;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #E8F0FF;
+    }
+</style>
+
+
+
+<div class="wagonborder">
+    @{
+        int left = 48;
+        string leftpx = String.Format("{0}px", left);
+        <div class="wall" style="left:5px"></div>
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:40px" class="toilet" />
+        <div class="wall" style="left:@leftpx"></div>
+        string leftpxwall;
+        left = 70;
+        for (int i = 3; i <= Model.CountOfSeats; i += 4)
+        {
+            leftpx = String.Format("{0}px", left);
+            leftpxwall = String.Format("{0}px", left + 25);
+            int a = i + 1;
+
+            <div class="evenplace" style="left:@leftpx; "> @a</div>
+            <div class="oddplace" style="left:@leftpx; "> @i</div>
+
+            left = left + 50;
+
+        }
+
+        left = 48;
+        leftpx = String.Format("{0}px", left);
+        <div class="lowwall" style="left:5px"></div>
+        <div class="lowwall" style="left:@leftpx"></div>
+        left = 70;
+        for (int i = 1; i <= Model.CountOfSeats; i+=4)
+        {
+            leftpx = String.Format("{0}px", left);
+            leftpxwall = String.Format("{0}px", left + 25);
+            int a = i + 1;
+
+            <div class="evenlowplace" style="left:@leftpx; "> @a</div>
+            <div class="oddlowplace" style="left:@leftpx; "> @i</div>
+
+
+            left = left + 50;
+        }
+
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:980px" class="toilet" />
+        <div class="wall" style="left:988px"></div>
+        <div class="lowwall" style="left:988px"></div>
+        <br />
+
+    }
+</div>
