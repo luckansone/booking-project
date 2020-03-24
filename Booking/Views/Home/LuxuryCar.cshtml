@@ -1,0 +1,48 @@
+﻿@model Booking.ViewModels.CarInfoViewModel
+
+@{
+    ViewBag.Title = "LuxuryCar";
+    TempData["TrainInfo"] = ViewBag.TrainInfo;
+
+}
+
+
+    <div class="wagonborder luxury">
+        @{
+            int left = 48;
+            string leftpx = String.Format("{0}px", left);
+            <div class="wall luxurywall" style="left:5px"></div>
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:40px" class="toilet" />
+            <div class="wall luxurywall" style="left:@leftpx"></div>
+            string leftpxwall;
+            left = 70;
+            for (int i = 1; i <= Model.CountOfSeats; i++)
+            {
+                leftpx = String.Format("{0}px", left);
+                leftpxwall = String.Format("{0}px", left + 25);
+
+
+                <div class="place luxuryplace" style="left:@leftpx; ">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value=@i.ToString()><span> @i</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wall luxurywall" style="left:@leftpxwall"></div>
+
+
+                left = left + 50;
+
+            }
+            <div class="wall lowluxurywall" style="left:5px"></div>
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:1080px" class="toilet" />
+            <div class="wall luxurywall" style="left:1085px"></div>
+            <div class="wall lowluxurywall" style="left:1085px"></div>
+            <br />
+        }
+    </div>
+
+
+

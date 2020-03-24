@@ -70,6 +70,16 @@ namespace Booking.Controllers
                         viewName = "CompartmentCar";
                         break;
                     }
+                case "Люкс":
+                    {
+                        viewName = "LuxuryCar";
+                        break;
+                    }
+                case "Сидячий":
+                    {
+                        viewName = "SittingCar";
+                        break;
+                    }
             }
         }
         public ActionResult Details(int trainId, string carType)

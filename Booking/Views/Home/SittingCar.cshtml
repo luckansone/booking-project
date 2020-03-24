@@ -1,0 +1,63 @@
+﻿@model Booking.ViewModels.CarInfoViewModel
+
+@{
+    TempData["TrainInfo"] = ViewBag.TrainInfo;
+}
+
+
+<div class="wagonborder sitting">
+    @{
+        <div class="wall" style="left: 5px"></div>
+        int left = 70;
+        string leftpx;
+        for (int i = 3; i <= Model.CountOfSeats; i += 4)
+        {
+            leftpx = String.Format("{0}px", left);
+
+            int a = i + 1;
+
+            <div class="place evenplace" style="left:@leftpx; "> @a</div>
+            <div class="place oddplace" style="left:@leftpx; "> @i</div>
+
+            if (a == 52)
+            {
+                left = left + 50;
+                string leftpxtable = String.Format("{0}px", left);
+                <div class="tablecar" style="left:@leftpxtable"></div>
+            }
+
+            left = left + 50;
+
+        }
+
+        <div class="wall lowwall" style="left:5px"></div>
+        left = 70;
+        for (int i = 1; i <= Model.CountOfSeats; i += 4)
+        {
+            leftpx = String.Format("{0}px", left);
+            int a = i + 1;
+
+            <div class="place evenlowplace" style="left:@leftpx; "> @a</div>
+            <div class="place oddlowplace" style="left:@leftpx; "> @i</div>
+
+            if (a == 2)
+            {
+                left = left + 50;
+                string leftpxtable = String.Format("{0}px", left);
+                <div class="tablecar" style="left:@leftpxtable; top:128px"></div>
+
+            }
+
+
+            left = left + 50;
+        }
+
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left: 835px " class="toilet" />
+        <div class="wall" style="left:800px"></div>
+        <div class="wall" style="left:840px"></div>
+        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:835px; top:190px" class="toilet" />
+        <div class="wall lowwall" style="left:800px"></div>
+        <div class="wall lowwall" style="left:840px"></div>
+        <br />
+    }
+</div>

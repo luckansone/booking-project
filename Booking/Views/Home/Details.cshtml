@@ -8,7 +8,6 @@
 <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
-
 <br />
 <br />
 <br />
@@ -59,9 +58,9 @@
             {
                 <td>
 
-                    @Ajax.ActionLink(@car.Number.ToString(), "CompartmentCar", new { carId = car.CarriageId }, new AjaxOptions { UpdateTargetId = "carriageInfo" })
+                    @Ajax.ActionLink(String.Format("№{0}",@car.Number), "CompartmentCar", new { carId = car.CarriageId }, new AjaxOptions { UpdateTargetId = "carriageInfo" })
                     Вільні місця: @car.FreeSeats <br />
-                    <img src="https://booking.uz.gov.ua/i/img/desktop/wagon.png" />
+                   <img src="https://booking.uz.gov.ua/i/img/desktop/wagon.png" />
                 </td>
             }
         </tr>

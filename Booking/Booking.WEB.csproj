@@ -239,6 +239,8 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Scripts\search.view.js" />
     <Content Include="Views\Home\SeatPostCar.cshtml" />
+    <Content Include="Views\Home\LuxuryCar.cshtml" />
+    <Content Include="Views\Home\SittingCar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
