@@ -6,38 +6,76 @@
 
 }
 
+    <script type="text/javascript">
 
-<div class="wagonborder">
-    @{
-        int left = 48;
-        string leftpx = String.Format("{0}px", left);
-        <div class="wall" style="left:5px"></div>
-        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:40px" class="toilet" />
-        <div class="wall" style="left:@leftpx"></div>
-        string leftpxwall;
-        left = 70;
-        for (int i = 1; i <= Model.CountOfSeats; i += 2)
-        {
-            leftpx = String.Format("{0}px", left);
-            leftpxwall = String.Format("{0}px", left + 25);
-            int a = i + 1;
-
-            <div class="place evenplace" style="left:@leftpx; "> @a</div>
-            <div class="place oddplace" style="left:@leftpx; "> @i</div>
-
-            if (a % 4 == 0)
-            {
-                <div class="wall" style="left:@leftpxwall"></div>
+        $(document).ready(function (e) {
+            var model = '@Html.Raw(Json.Encode(Model.ReservedSeats))';
+            var data = JSON.parse(model);
+            var i;
+            for (i = 0; i < data.length; i++) {
+                document.getElementById(data[i].Number).disabled = true;
             }
+        });
+    </script>
 
-            left = left + 50;
 
+@using (Ajax.BeginForm("ChooseSeats", new AjaxOptions { UpdateTargetId = "seatchoice" }))
+{
+    @Html.HiddenFor(m => m.CarriageId)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Number)
+
+    <div class="wagonborder">
+        @{
+            int left = 48;
+            string leftpx = String.Format("{0}px", left);
+            <div class="wall" style="left:5px"></div>
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:40px" class="toilet" />
+            <div class="wall" style="left:@leftpx"></div>
+            string leftpxwall;
+            left = 70;
+            for (int i = 1; i <= Model.CountOfSeats; i += 2)
+            {
+                leftpx = String.Format("{0}px", left);
+                leftpxwall = String.Format("{0}px", left + 25);
+                int a = i + 1;
+
+                <div class="place evenplace" style="left:@leftpx;">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@a" name="selectedSeats" id="@a"><span> @a</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="place oddplace" style="left:@leftpx; ">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@i" name="selectedSeats" id="@i"><span> @i</span>
+                        </label>
+                    </div>
+                </div>
+
+                if (a % 4 == 0)
+                {
+                    <div class="wall" style="left:@leftpxwall"></div>
+                }
+
+                left = left + 50;
+
+            }
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:980px" class="toilet" />
+            <div class="wall" style="left:988px"></div>
         }
-
-        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:980px" class="toilet" />
-        <div class="wall" style="left:988px"></div>
         <br />
 
-    }
-</div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="searchbutton">
+            <input style="margin-left:400px; border:0px" type="submit" value="Добавити в кошик" class="btn btn-primary btn-lg btn-block" />
+        </div>
+    </div>
+}
+
 

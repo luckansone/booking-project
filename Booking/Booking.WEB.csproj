@@ -233,7 +233,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\SearchTrains.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\CompartmentCar.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
@@ -241,6 +240,8 @@
     <Content Include="Views\Home\SeatPostCar.cshtml" />
     <Content Include="Views\Home\LuxuryCar.cshtml" />
     <Content Include="Views\Home\SittingCar.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ChooseSeats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

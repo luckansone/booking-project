@@ -3,9 +3,27 @@
 @{
     ViewBag.Title = "LuxuryCar";
     TempData["TrainInfo"] = ViewBag.TrainInfo;
-
 }
 
+<script type="text/javascript">
+
+        $(document).ready(function (e) {
+            var model = '@Html.Raw(Json.Encode(Model.ReservedSeats))';
+            var data = JSON.parse(model);
+            var i;
+            for (i = 0; i < data.length; i++) {
+                document.getElementById(data[i].Number).disabled = true;
+            }
+        });
+</script>
+
+
+
+@using (Ajax.BeginForm("ChooseSeats", new AjaxOptions { UpdateTargetId = "seatchoice" }))
+{
+    @Html.HiddenFor(m => m.CarriageId)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Number)
 
     <div class="wagonborder luxury">
         @{
@@ -21,11 +39,11 @@
                 leftpx = String.Format("{0}px", left);
                 leftpxwall = String.Format("{0}px", left + 25);
 
-
+              
                 <div class="place luxuryplace" style="left:@leftpx; ">
                     <div id="ck-button">
                         <label>
-                            <input type="checkbox" value=@i.ToString()><span> @i</span>
+                            <input type="checkbox" value="@i" name="selectedSeats" id="@i"><span style="height:60px"> @i</span>
                         </label>
                     </div>
                 </div>
@@ -41,8 +59,17 @@
             <div class="wall luxurywall" style="left:1085px"></div>
             <div class="wall lowluxurywall" style="left:1085px"></div>
             <br />
+
         }
     </div>
+    <br />
+    <div class="form-group">
+        <div class="searchbutton">
+            <input style="margin-left:400px; border:0px" type="submit" value="Добавити в кошик" class="btn btn-primary btn-lg btn-block" />
+        </div>
+    </div>
+}
 
+<div id="seatchoice"></div>
 
 

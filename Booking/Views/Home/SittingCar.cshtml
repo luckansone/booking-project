@@ -4,60 +4,108 @@
     TempData["TrainInfo"] = ViewBag.TrainInfo;
 }
 
+<script type="text/javascript">
 
-<div class="wagonborder sitting">
-    @{
-        <div class="wall" style="left: 5px"></div>
-        int left = 70;
-        string leftpx;
-        for (int i = 3; i <= Model.CountOfSeats; i += 4)
-        {
-            leftpx = String.Format("{0}px", left);
+        $(document).ready(function (e) {
+            var model = '@Html.Raw(Json.Encode(Model.ReservedSeats))';
+            var data = JSON.parse(model);
+            var i;
+            for (i = 0; i < data.length; i++) {
+                document.getElementById(data[i].Number).disabled = true;
+            }
+        });
+</script>
 
-            int a = i + 1;
+@using (Ajax.BeginForm("ChooseSeats", new AjaxOptions { UpdateTargetId = "seatchoice" }))
+{
+    @Html.HiddenFor(m => m.CarriageId)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Number)
 
-            <div class="place evenplace" style="left:@leftpx; "> @a</div>
-            <div class="place oddplace" style="left:@leftpx; "> @i</div>
-
-            if (a == 52)
+    <div class="wagonborder sitting">
+        @{
+            <div class="wall" style="left: 5px"></div>
+            int left = 70;
+            string leftpx;
+            for (int i = 3; i <= Model.CountOfSeats; i += 4)
             {
+                leftpx = String.Format("{0}px", left);
+
+                int a = i + 1;
+
+                <div class="place evenplace" style="left:@leftpx;">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@a" name="selectedSeats" id="@a"><span> @a</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="place oddplace" style="left:@leftpx; ">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@i" name="selectedSeats"id="@i"><span> @i</span>
+                        </label>
+                    </div>
+                </div>
+
+                if (a == 52)
+                {
+                    left = left + 50;
+                    string leftpxtable = String.Format("{0}px", left);
+                    <div class="tablecar" style="left:@leftpxtable"></div>
+                }
+
                 left = left + 50;
-                string leftpxtable = String.Format("{0}px", left);
-                <div class="tablecar" style="left:@leftpxtable"></div>
+
             }
 
-            left = left + 50;
-
-        }
-
-        <div class="wall lowwall" style="left:5px"></div>
-        left = 70;
-        for (int i = 1; i <= Model.CountOfSeats; i += 4)
-        {
-            leftpx = String.Format("{0}px", left);
-            int a = i + 1;
-
-            <div class="place evenlowplace" style="left:@leftpx; "> @a</div>
-            <div class="place oddlowplace" style="left:@leftpx; "> @i</div>
-
-            if (a == 2)
+            <div class="wall lowwall" style="left:5px"></div>
+            left = 70;
+            for (int i = 1; i <= Model.CountOfSeats; i += 4)
             {
-                left = left + 50;
-                string leftpxtable = String.Format("{0}px", left);
-                <div class="tablecar" style="left:@leftpxtable; top:128px"></div>
+                leftpx = String.Format("{0}px", left);
+                int a = i + 1;
 
+                <div class="place evenlowplace" style="left:@leftpx;">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@a" name="selectedSeats"id="@a"><span> @a</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="place oddlowplace" style="left:@leftpx; ">
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" value="@i" name="selectedSeats"id="@i"><span> @i</span>
+                        </label>
+                    </div>
+                </div>
+
+                if (a == 2)
+                {
+                    left = left + 50;
+                    string leftpxtable = String.Format("{0}px", left);
+                    <div class="tablecar" style="left:@leftpxtable; top:128px"></div>
+                }
+
+
+                left = left + 50;
             }
 
-
-            left = left + 50;
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left: 835px " class="toilet" />
+            <div class="wall" style="left:800px"></div>
+            <div class="wall" style="left:840px"></div>
+            <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:835px; top:190px" class="toilet" />
+            <div class="wall lowwall" style="left:800px"></div>
+            <div class="wall lowwall" style="left:840px"></div>
         }
-
-        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left: 835px " class="toilet" />
-        <div class="wall" style="left:800px"></div>
-        <div class="wall" style="left:840px"></div>
-        <img src="https://booking.uz.gov.ua//i/img/coach/toilet_full.png" style="left:835px; top:190px" class="toilet" />
-        <div class="wall lowwall" style="left:800px"></div>
-        <div class="wall lowwall" style="left:840px"></div>
-        <br />
-    }
-</div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="searchbutton">
+            <input style="margin-left:400px; border:0px" type="submit" value="Добавити в кошик" class="btn btn-primary btn-lg btn-block" />
+        </div>
+    </div>
+}
