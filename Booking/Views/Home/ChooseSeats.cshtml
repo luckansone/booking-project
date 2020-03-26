@@ -1,0 +1,53 @@
+﻿@model Booking.ViewModels.CarInfoViewModel
+
+@{
+    if (Model.ChosenSeats.Count == 0)
+    {
+        <p><center><b>Ви не обрали місця у вагоні.</b></center></p>
+    }
+    else
+    {
+        if (Model.ChosenSeats.Count > 4)
+        {
+            <p><center><b>Не можна обирати більше 4 місць за раз.</b></center></p>
+        }
+        else
+        {
+<table class="table table-hover">
+    <thead class="thead-style">
+        <tr>
+            <th>Ідентифікатор вагона</th>
+            <th>Номер вагона</th>
+            <th>Тип вагона</th>
+            <th>Обрані місця</th>
+        </tr>
+    </thead>
+
+        <tr>
+            <td>
+               @Model.CarriageId
+            </td>
+            <td>
+                @Model.Number
+            </td>
+            <td>
+                @Model.Name
+            </td>
+
+            <td>
+                @foreach (var seatnum in Model.ChosenSeats)
+                {
+                    <p>@seatnum</p>
+                }
+            </td>
+
+        </tr>
+    
+</table>
+
+
+        }
+    }
+}
+
+

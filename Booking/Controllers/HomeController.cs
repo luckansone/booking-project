@@ -6,7 +6,6 @@ using Booking.WEB.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Booking.Controllers
@@ -37,7 +36,7 @@ namespace Booking.Controllers
             return View(model);
         }
 
-        public ActionResult CompartmentCar(int carId)
+        public ActionResult CarInfo(int carId)
         {
             CarInfoViewModels = TempData["TrainInfo"] as List<CarInfoViewModel>;
             CarInfoViewModel model = new CarInfoViewModel();
@@ -126,6 +125,18 @@ namespace Booking.Controllers
                 .Select(x => new { value = x.Name });
 
             return Json(cities, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ChooseSeats(int [] selectedSeats, CarInfoViewModel model)
+        {
+            if (selectedSeats == null)
+            {
+                selectedSeats = new int[0];
+            }
+
+            model.ChosenSeats.AddRange(selectedSeats.ToList());
+            return PartialView(model);
         }
     }
 }
