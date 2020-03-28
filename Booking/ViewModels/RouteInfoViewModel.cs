@@ -18,10 +18,13 @@ namespace Booking.ViewModels
 
         public List<CarFreeInfoViewModel> CarriageFreeInfos { get; set; }
         public List<CarInfoViewModel> CarInfoViewModels { get; set; }
+        public CarInfoViewModel SelectedCarriage { get; set; }
 
         public RouteInfoViewModel()
         {
             CarriageFreeInfos = new List<CarFreeInfoViewModel>();
+            CarInfoViewModels = new List<CarInfoViewModel>();
+            SelectedCarriage = new CarInfoViewModel();
         }
     }
 }

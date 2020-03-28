@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ICityService.cs" />
+    <Compile Include="Interfaces\IPriceCalculateService.cs" />
     <Compile Include="Interfaces\ITrainSearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CityService.cs" />
+    <Compile Include="Services\PriceCalculateService.cs" />
     <Compile Include="Services\TrainSearchService.cs" />
   </ItemGroup>
   <ItemGroup>

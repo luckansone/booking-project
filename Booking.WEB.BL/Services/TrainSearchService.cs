@@ -11,11 +11,9 @@ namespace Booking.BL.Services
     public class TrainSearchService: ITrainSearchService<Info, SearchTrainsModel>
     {
 
-        SearchTrainsModel model { get; set; }
-        private IUnitOfWork unitOfWork { get; set; }
+        private readonly IUnitOfWork unitOfWork;
 
     
-
         public TrainSearchService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
