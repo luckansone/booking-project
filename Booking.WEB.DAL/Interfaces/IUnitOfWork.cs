@@ -16,5 +16,6 @@ namespace Booking.WEB.DAL.Interfaces
          IRepository<Order> orderRepository { get; set; }
          IRepository<Ticket> ticketRepository { get; set; }
          ISearchEngine<Info, SearchTrainsModel> infoRepository { get; set; }
+         ICalculator Calculator { get; set; }
     }
 }

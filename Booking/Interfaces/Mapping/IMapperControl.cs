@@ -15,5 +15,6 @@ namespace Booking.Interfaces.Mapping
         SearchTrainsModel GetSearchModelByModelView(SearchTrainsViewModel model);
         InfoViewModel GetInfoViewModelByInfo(Info model);
         List<CarInfoViewModel> GetCarModelByCar(List<CarriageInfo> model);
+        RouteInfo GetRouteInfoByRouteInfoViewModel(RouteInfoViewModel model);
     }
 }

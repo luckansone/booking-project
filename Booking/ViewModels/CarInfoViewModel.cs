@@ -14,12 +14,11 @@ namespace Booking.ViewModels
         public int CountOfSeats { get; set; }
         public int FreeSeats { get; set; }
         public List<ReservedSeatViewModel> ReservedSeats { get; set; }
-        public List<int> ChosenSeats { get; set; }
+        public List<SelectedSeat> ChosenSeats { get; set; }
 
         public CarInfoViewModel()
         {
             ReservedSeats = new List<ReservedSeatViewModel>();
-            ChosenSeats = new List<int>();
         }
     }
 }

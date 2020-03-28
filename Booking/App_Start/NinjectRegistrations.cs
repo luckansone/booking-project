@@ -7,6 +7,7 @@ using Booking.DAL.SearchEngine;
 using Booking.Interfaces.Mapping;
 using Booking.WEB.BL.Interfaces;
 using Booking.WEB.BL.Services;
+using Booking.WEB.DAL.Calculator;
 using Booking.WEB.DAL.Interfaces;
 using Booking.WEB.DAL.Models;
 using Booking.WEB.DAL.Repositories;
@@ -33,6 +34,8 @@ namespace Booking.App_Start
             Bind<IUnitOfWork>().To<UnitOfWork>();
             Bind<ITrainSearchService<Info, SearchTrainsModel>>().To<TrainSearchService>();
             Bind<IMapperControl>().To<MapperControl>();
+            Bind<ICalculator>().To<Calculator>();
+            Bind<IPriceCalculateService>().To<PriceCalculateService>();
         }
     }
 }

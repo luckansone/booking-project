@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Details";
-    TempData["InfoItems"] = ViewBag.InfoItems;
 }
 
 <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
@@ -66,11 +65,9 @@
             }
         </tr>
     </table>
-    <div id="carriageInfo">
+        <div id="carriageInfo">
 
+        </div>
+    
     </div>
-</div>
 <br />
-@*<p>
-        @Html.ActionLink("Назад", "Search", null, new { @class = "btn btn-primary btn-lg" })
-    </p>*@

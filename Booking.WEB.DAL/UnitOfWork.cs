@@ -14,16 +14,18 @@ namespace Booking.DAL
         public IRepository<Order> orderRepository { get; set; }
         public IRepository<Ticket> ticketRepository { get; set; }
         public ISearchEngine<Info, SearchTrainsModel> infoRepository { get; set; }
+        public ICalculator Calculator { get; set; }
 
         public UnitOfWork(IRepository<Person> personRepository, IRepository<Order> orderRepository,
             IRepository<Ticket> ticketRepository, ISearchEngine<Info,SearchTrainsModel> infoRepository,
-            IRepository<City> cityRepository)
+            IRepository<City> cityRepository, ICalculator Calculator )
         {
             this.personRepository = personRepository;
             this.orderRepository = orderRepository;
             this.ticketRepository = ticketRepository;
             this.infoRepository = infoRepository;
             this.cityRepository = cityRepository;
+            this.Calculator = Calculator;
         }
 
     }

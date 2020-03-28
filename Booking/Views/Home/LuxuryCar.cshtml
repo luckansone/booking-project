@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "LuxuryCar";
-    TempData["TrainInfo"] = ViewBag.TrainInfo;
 }
 
 <script type="text/javascript">
@@ -16,7 +15,6 @@
             }
         });
 </script>
-
 
 
 @using (Ajax.BeginForm("ChooseSeats", new AjaxOptions { UpdateTargetId = "seatchoice" }))
@@ -65,7 +63,7 @@
     <br />
     <div class="form-group">
         <div class="searchbutton">
-            <input style="margin-left:400px; border:0px" type="submit" value="Добавити в кошик" class="btn btn-primary btn-lg btn-block" />
+            <input style="margin-left:400px; border:0px" type="submit" value="Дізнатись ціну" class="btn btn-primary btn-lg btn-block" />
         </div>
     </div>
 }

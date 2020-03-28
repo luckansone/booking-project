@@ -30,9 +30,17 @@ namespace Booking.WEB.Mapping
                 cfg.CreateMap<RouteInfo, RouteInfoViewModel>()
                 .ForMember("CarriageFreeInfos", opt => opt.MapFrom(c => c.CarriageFreeSeatsInfos))
                 .ForMember("CarInfoViewModels", opt => opt.MapFrom(c => c.CarriageInfos));
-
                 cfg.CreateMap<Info, InfoViewModel>();
-                 
+
+                cfg.CreateMap<ReservedSeatViewModel, ReservedSeat>();
+                cfg.CreateMap<CarInfoViewModel, CarriageInfo>();
+                cfg.CreateMap<CarFreeInfoViewModel, CarriageFreeSeatsInfo>();
+                cfg.CreateMap<RouteInfoViewModel, RouteInfo>()
+                .ForMember("CarriageFreeSeatsInfos", opt => opt.MapFrom(c => c.CarriageFreeInfos))
+                .ForMember("CarriageInfos", opt => opt.MapFrom(c => c.CarInfoViewModels));
+
+                cfg.CreateMap<Person, PersonViewModel>();
+                cfg.CreateMap<PersonViewModel, Person>();
 
                 cfg.AllowNullCollections = true;
             });
@@ -52,6 +60,16 @@ namespace Booking.WEB.Mapping
         public SearchTrainsModel GetSearchModelByModelView(SearchTrainsViewModel model)
         {
             return mapper.Map<SearchTrainsViewModel, SearchTrainsModel>(model);
+        }
+
+        public RouteInfo GetRouteInfoByRouteInfoViewModel(RouteInfoViewModel model)
+        {
+            return mapper.Map<RouteInfoViewModel, RouteInfo>(model);
+        }
+
+        public List<Person> GetPersonListByPersonViewList(List<PersonViewModel> models)
+        {
+            return mapper.Map<List<PersonViewModel>, List<Person>>(models);
         }
 
     }

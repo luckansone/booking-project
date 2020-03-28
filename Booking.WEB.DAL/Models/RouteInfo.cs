@@ -16,11 +16,13 @@ namespace Booking.DAL.Models
         public string Duration { get; set; }
         public List<CarriageFreeSeatsInfo> CarriageFreeSeatsInfos { get; set; }
         public List<CarriageInfo> CarriageInfos { get; set; }
+        public CarriageInfo SelectedCarriage { get; set; }
 
         public RouteInfo()
         {
             CarriageFreeSeatsInfos = new List<CarriageFreeSeatsInfo>();
             CarriageInfos = new List<CarriageInfo>();
+            SelectedCarriage = new CarriageInfo();
         }
     }
 }

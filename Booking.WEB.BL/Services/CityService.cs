@@ -12,7 +12,7 @@ namespace Booking.WEB.BL.Services
 {
     public class CityService : ICityService
     {
-        private IUnitOfWork unitOfWork { get; set; }
+        private readonly IUnitOfWork unitOfWork;
         public CityService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;

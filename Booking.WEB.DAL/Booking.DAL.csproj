@@ -45,7 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\Calculator.cs" />
     <Compile Include="Interfaces\IBookingContext.cs" />
+    <Compile Include="Interfaces\ICalculator.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ISearchEngine.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

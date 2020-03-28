@@ -12,5 +12,8 @@ namespace Booking.DAL.Models
         public int CarriageNumber { get; set; }
         public string TrainName { get; set; }
         public string RouteDescription { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
+
     }
 }

@@ -137,6 +137,7 @@
     <Compile Include="App_Start\NinjectRegistrations.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,9 +147,11 @@
     <Compile Include="ViewModels\CarFreeInfoViewModel.cs" />
     <Compile Include="ViewModels\CarInfoViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\ReservedSeatViewModel.cs" />
     <Compile Include="ViewModels\RouteInfoViewModel.cs" />
     <Compile Include="ViewModels\SearchTrainsViewModel.cs" />
+    <Compile Include="ViewModels\SelectedSeat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -242,10 +245,12 @@
     <Content Include="Views\Home\SittingCar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ChooseSeats.cshtml" />
+    <Content Include="Views\Person\PeopleForms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
