@@ -177,9 +177,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IPdfCreator.cs" />
     <Compile Include="Interfaces\Mapping\IMapperControl.cs" />
     <Compile Include="Mapping\MapperControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PdfCreator.cs" />
     <Compile Include="ViewModels\CarFreeInfoViewModel.cs" />
     <Compile Include="ViewModels\CarInfoViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />

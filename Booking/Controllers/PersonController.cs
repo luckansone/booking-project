@@ -11,6 +11,9 @@ using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+using System.Web.Hosting;
+using iText.IO.Font;
+using Booking.Interfaces;
 
 namespace Booking.Controllers
 {
@@ -22,17 +25,19 @@ namespace Booking.Controllers
         private readonly IReservedSeatService reservedSeatService;
         private readonly IOrderService orderService;
         private readonly ITicketService ticketService;
+        private readonly IPdfCreator pdfCreator;
 
         List<TicketViewModel> ticketViewModels;
         public PersonController( IMapperControl mapperControl, IPersonService personService,
             IReservedSeatService reservedSeatService, ITicketService ticketService,
-            IOrderService orderService)
+            IOrderService orderService, IPdfCreator pdfCreator)
         {
             this.mapperControl = mapperControl;
             this.personService = personService;
             this.reservedSeatService = reservedSeatService;
             this.ticketService = ticketService;
             this.orderService = orderService;
+            this.pdfCreator = pdfCreator;
             personViewModels = new List<PersonViewModel>();
             ticketViewModels = new List<TicketViewModel>();
         }
@@ -80,7 +85,7 @@ namespace Booking.Controllers
                     CarriageNumber = route.SelectedCarriage.Number,
                     DepartureTime = route.DepartureTime,
                     SeatId = seatId,
-                    SNP = String.Format("{0} {1} {2}", people[0].Name, people[0].Surname, people[0].Patronymic)
+                    SNP = String.Format("{0} {1} {2}", people[i].Name, people[i].Surname, people[i].Patronymic)
                 });
             }
             var tickets = mapperControl.GetTicketsByViewModel(ticketViewModels);
@@ -88,26 +93,17 @@ namespace Booking.Controllers
 
             for(int i = 0; i < tickets.Count();i++)
             {
-                orderService.MakeOrder(people[0].PersonId, tickets[0].TicketId);
+                orderService.MakeOrder(people[i].PersonId, tickets[i].TicketId);
             }
 
-            Session["TicketsInfo"] = ticketViewModels;
+            CreatePdf(ticketViewModels);
 
             return View("GetTickets", ticketViewModels);
         }
 
-        public void CreatePdf()
+       private void CreatePdf(List<TicketViewModel> ticketInfo)
         {
-            List<TicketViewModel> ticketInfo = Session["TicketsInfo"] as List<TicketViewModel>;
-            PdfWriter writer = new PdfWriter(@"C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\App_Data\ticket.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN);
-          
-            document.Add(new Paragraph("Ticket").SetFont(font));
-            List list = new List().SetSymbolIndent(12).SetListSymbol("\u2022").SetFont(font);
-            document.Add(list);
-            document.Close();
+            pdfCreator.CreatePdf(ticketInfo);
         }
     }
 }
