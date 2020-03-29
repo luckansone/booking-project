@@ -8,24 +8,24 @@ namespace Booking.WEB.ViewModels
 {
     public class SearchTrainsViewModel
     {
-        
+
+     
         [Display(Name ="Звідки")]
-        [Required(ErrorMessage = "Введіть дані.")]
+        [Required]
         public string FromStation { get; set; }
 
-        
         [Display(Name = "Куди")]
-        [Required(ErrorMessage ="Введіть дані.")]
+        [Required]
+
         public string ToStation { get; set; }
 
-        [Display(Name = "Дата")]
-        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         [Required]
-        public DateTime DateOfDeparture { get; set; }
+        [Display(Name = "Дата")]
+        [DisplayFormat(DataFormatString = "{0:dd.mm.yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? DateOfDeparture { get; set; }
 
-        
         [Display(Name = "Час від")]
-        [Required(ErrorMessage = "Введіть дані.")]
+        [Required]
         public string TimeOfDeparture { get; set; }
 
         public SelectList times { get; set; }

@@ -55,7 +55,12 @@ namespace Booking.DAL.Repositories
 
         public Order Create(Order item)
         {
-            throw new NotImplementedException();
+            using (IDbConnection conn = _context.GetConnection())
+            {
+                int orderId = conn.Query<int>(String.Format(@"INSERT INTO ""Order""(TicketId, PersonId) VALUES({0},{1});SELECT CAST(SCOPE_IDENTITY() as int);", item.TicketId, item.PersonId)).FirstOrDefault();
+            } 
+
+            return item;
         }
     }
 }
