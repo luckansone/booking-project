@@ -1,8 +1,37 @@
 ﻿@model IEnumerable<Booking.ViewModels.TicketViewModel>
 
+
 @{
     ViewBag.Title = "GetTickets";
+
 }
+
+<script type="text/javascript">
+   $(function(){
+        $(".emailsender").click(function (e) {
+            var url = this.href;
+            var dialog = $("#dialog");
+            if ($("#dialog").length == 0) {
+                dialog = $('<div id="dialog" style="display:hidden"></div>').appendTo('body');
+            }
+            dialog.load(
+                url,
+                {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({                       
+                        close: function (event, ui) {                            
+                            dialog.remove();
+                        },
+                        modal: true,                            
+                         width: 460, resizable: false
+                    });
+                }
+            );           
+            return false;           
+        });
+    });
+
+</script>
 
 <br />
 <br />
@@ -35,42 +64,42 @@
                 Ціна
             </th>
             <th>
-                
+
             </th>
         </tr>
-        </thead>
+    </thead>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SNP)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    №@Html.DisplayFor(modelItem => item.TrainName)
-                </td>
-                <td>
-                    №@Html.DisplayFor(modelItem => item.CarriageNumber)
-                </td>
-                <td>
-                    №@Html.DisplayFor(modelItem => item.SeatNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartureTime)-<br />
-                    @Html.DisplayFor(modelItem => item.ArrivalTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                №@Html.DisplayFor(modelItem => item.TrainName)
+            </td>
+            <td>
+                №@Html.DisplayFor(modelItem => item.CarriageNumber)
+            </td>
+            <td>
+                №@Html.DisplayFor(modelItem => item.SeatNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)-<br />
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
 
-                <td>
-                    @Html.ActionLink("Скачати", "CreatePdf", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) <br />
-                    @Html.ActionLink("Скинути на почту", "EmailSender", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) 
-                </td>
-            </tr>
-        }
+            <td>
+                @Html.ActionLink("Скачати", "Download", new { id = item.SeatId }, new { @class = "btn btn-primary btn-lg btn-block fixedbuttonsize" }) <br />
+                @Html.ActionLink("Скинути на почту", "EmailSender", new { id = item.SeatId, email = item.Email }, new { @class = "btn btn-primary btn-lg btn-block fixedbuttonsize emailsender " })
+            </td>
+        </tr>
+    }
 
 </table>

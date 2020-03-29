@@ -17,7 +17,9 @@
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: ''
+        yearSuffix: '',
+        minDate: '-0D',
+        maxDate: '+3M'
     };
 
     $("#DateOfDeparture").datepicker($.datepicker.regional["ru"]);

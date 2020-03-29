@@ -17,5 +17,6 @@ namespace Booking.ViewModels
         public DateTime ArrivalTime { get; set; }
         public string Description { get; set; }
         public string SNP { get; set; }
+        public string Email { get; set; }
     }
 }

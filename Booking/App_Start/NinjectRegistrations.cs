@@ -4,7 +4,9 @@ using Booking.DAL.Interfaces;
 using Booking.DAL.Models;
 using Booking.DAL.Repositories;
 using Booking.DAL.SearchEngine;
+using Booking.Interfaces;
 using Booking.Interfaces.Mapping;
+using Booking.Services;
 using Booking.WEB.BL.Interfaces;
 using Booking.WEB.BL.Services;
 using Booking.WEB.DAL.Calculator;
@@ -41,6 +43,8 @@ namespace Booking.App_Start
             Bind<IReservedSeatService>().To<ReservedSeatService>();
             Bind<ITicketService>().To<TicketService>();
             Bind<IOrderService>().To<OrderService>();
+            Bind<IPdfCreator>().To<PdfCreator>();
+            Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }

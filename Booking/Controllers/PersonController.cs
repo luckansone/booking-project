@@ -4,13 +4,11 @@ using Booking.WEB.BL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using iText.IO.Font.Constants;
-using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
+using System.Web.Hosting;
+using Booking.Interfaces;
+using Booking.Models;
+using System.Net;
 
 namespace Booking.Controllers
 {
@@ -22,17 +20,21 @@ namespace Booking.Controllers
         private readonly IReservedSeatService reservedSeatService;
         private readonly IOrderService orderService;
         private readonly ITicketService ticketService;
+        private readonly IPdfCreator pdfCreator;
+        private readonly IEmailSender emailSender;
 
         List<TicketViewModel> ticketViewModels;
         public PersonController( IMapperControl mapperControl, IPersonService personService,
             IReservedSeatService reservedSeatService, ITicketService ticketService,
-            IOrderService orderService)
+            IOrderService orderService, IPdfCreator pdfCreator, IEmailSender emailSender)
         {
             this.mapperControl = mapperControl;
             this.personService = personService;
             this.reservedSeatService = reservedSeatService;
             this.ticketService = ticketService;
             this.orderService = orderService;
+            this.pdfCreator = pdfCreator;
+            this.emailSender = emailSender;
             personViewModels = new List<PersonViewModel>();
             ticketViewModels = new List<TicketViewModel>();
         }
@@ -55,6 +57,7 @@ namespace Booking.Controllers
         {
             var people = mapperControl.GetPersonListByPersonViewList(model);
             people = personService.CreatePerson(people);
+           
             RouteInfoViewModel route = Session["RouteInfo"] as RouteInfoViewModel;
             List<ReservedSeatViewModel> seats = new List<ReservedSeatViewModel>();
 
@@ -71,6 +74,7 @@ namespace Booking.Controllers
                 int seatId = reservedSeats.Find(x => x.Number.Equals(route.SelectedCarriage.ChosenSeats[i].Number)).SeatId;
                 ticketViewModels.Add(new TicketViewModel
                 {
+                    Email = people[i].Email,
                     TrainName = route.TrainName,
                     SeatNumber = route.SelectedCarriage.ChosenSeats[i].Number,
                     Price = route.SelectedCarriage.ChosenSeats[i].Price,
@@ -80,7 +84,7 @@ namespace Booking.Controllers
                     CarriageNumber = route.SelectedCarriage.Number,
                     DepartureTime = route.DepartureTime,
                     SeatId = seatId,
-                    SNP = String.Format("{0} {1} {2}", people[0].Name, people[0].Surname, people[0].Patronymic)
+                    SNP = String.Format("{0} {1} {2}", people[i].Name, people[i].Surname, people[i].Patronymic)
                 });
             }
             var tickets = mapperControl.GetTicketsByViewModel(ticketViewModels);
@@ -88,26 +92,47 @@ namespace Booking.Controllers
 
             for(int i = 0; i < tickets.Count();i++)
             {
-                orderService.MakeOrder(people[0].PersonId, tickets[0].TicketId);
+                orderService.MakeOrder(people[i].PersonId, tickets[i].TicketId);
             }
 
-            Session["TicketsInfo"] = ticketViewModels;
+            CreatePdf(ticketViewModels);
 
             return View("GetTickets", ticketViewModels);
         }
 
-        public void CreatePdf()
+       private void CreatePdf(List<TicketViewModel> ticketInfo)
         {
-            List<TicketViewModel> ticketInfo = Session["TicketsInfo"] as List<TicketViewModel>;
-            PdfWriter writer = new PdfWriter(@"C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\App_Data\ticket.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN);
-          
-            document.Add(new Paragraph("Ticket").SetFont(font));
-            List list = new List().SetSymbolIndent(12).SetListSymbol("\u2022").SetFont(font);
-            document.Add(list);
-            document.Close();
+            pdfCreator.CreatePdf(ticketInfo);
+        }
+
+        public FileResult Download(int id)
+        {
+            string fileName = String.Format("ticket{0}.pdf", id);
+            string filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
+            return File(fileBytes, "application/pdf", fileName);
+        }
+
+        public string EmailSender(int id, string email)
+        {
+            string filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
+            var emailAttachmentMessage = new EmailStringAttachment();
+            emailAttachmentMessage.AttachmentsFilePath.Add(filepath);
+            emailAttachmentMessage.Subject = "Білет";
+            emailAttachmentMessage.Message = "Дякуємо, що разом з нами.\n Ваш Booking.";
+            emailAttachmentMessage.EmailTo = email;
+            string Result= string.Empty;
+            var httpstatus=emailSender.SendEmail(emailAttachmentMessage);
+            if (httpstatus.HttpStatusCode.Equals(HttpStatusCode.OK))
+            {
+                Result = "Повідомлення надіслано";
+            }
+            else
+            {
+                Result = "Проблеми з сервером. Скачайте білет";
+            }
+
+            return Result;
         }
     }
 }
