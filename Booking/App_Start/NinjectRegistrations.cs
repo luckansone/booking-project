@@ -44,6 +44,7 @@ namespace Booking.App_Start
             Bind<ITicketService>().To<TicketService>();
             Bind<IOrderService>().To<OrderService>();
             Bind<IPdfCreator>().To<PdfCreator>();
+            Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }

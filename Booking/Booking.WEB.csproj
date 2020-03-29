@@ -84,7 +84,13 @@
     <Reference Include="itext.svg, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.10\lib\net40\itext.svg.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.5.2\lib\net47\MailKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MimeKit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.5.2\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -100,6 +106,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -177,10 +184,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IEmailSender.cs" />
     <Compile Include="Interfaces\IPdfCreator.cs" />
     <Compile Include="Interfaces\Mapping\IMapperControl.cs" />
     <Compile Include="Mapping\MapperControl.cs" />
+    <Compile Include="Models\EmailMessage.cs" />
+    <Compile Include="Models\EmailStringAttachment.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\SmtpSendConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Services\PdfCreator.cs" />
     <Compile Include="ViewModels\CarFreeInfoViewModel.cs" />
     <Compile Include="ViewModels\CarInfoViewModel.cs" />
@@ -290,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,16 +4,11 @@ using Booking.WEB.BL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using iText.IO.Font.Constants;
-using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
 using System.Web.Hosting;
-using iText.IO.Font;
 using Booking.Interfaces;
+using Booking.Models;
+using System.Net;
 
 namespace Booking.Controllers
 {
@@ -26,11 +21,12 @@ namespace Booking.Controllers
         private readonly IOrderService orderService;
         private readonly ITicketService ticketService;
         private readonly IPdfCreator pdfCreator;
+        private readonly IEmailSender emailSender;
 
         List<TicketViewModel> ticketViewModels;
         public PersonController( IMapperControl mapperControl, IPersonService personService,
             IReservedSeatService reservedSeatService, ITicketService ticketService,
-            IOrderService orderService, IPdfCreator pdfCreator)
+            IOrderService orderService, IPdfCreator pdfCreator, IEmailSender emailSender)
         {
             this.mapperControl = mapperControl;
             this.personService = personService;
@@ -38,6 +34,7 @@ namespace Booking.Controllers
             this.ticketService = ticketService;
             this.orderService = orderService;
             this.pdfCreator = pdfCreator;
+            this.emailSender = emailSender;
             personViewModels = new List<PersonViewModel>();
             ticketViewModels = new List<TicketViewModel>();
         }
@@ -60,6 +57,7 @@ namespace Booking.Controllers
         {
             var people = mapperControl.GetPersonListByPersonViewList(model);
             people = personService.CreatePerson(people);
+           
             RouteInfoViewModel route = Session["RouteInfo"] as RouteInfoViewModel;
             List<ReservedSeatViewModel> seats = new List<ReservedSeatViewModel>();
 
@@ -76,6 +74,7 @@ namespace Booking.Controllers
                 int seatId = reservedSeats.Find(x => x.Number.Equals(route.SelectedCarriage.ChosenSeats[i].Number)).SeatId;
                 ticketViewModels.Add(new TicketViewModel
                 {
+                    Email = people[i].Email,
                     TrainName = route.TrainName,
                     SeatNumber = route.SelectedCarriage.ChosenSeats[i].Number,
                     Price = route.SelectedCarriage.ChosenSeats[i].Price,
@@ -108,10 +107,32 @@ namespace Booking.Controllers
 
         public FileResult Download(int id)
         {
-            var fileName = String.Format("ticket{0}.pdf", id);
-            var filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
+            string fileName = String.Format("ticket{0}.pdf", id);
+            string filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
             byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
             return File(fileBytes, "application/pdf", fileName);
+        }
+
+        public string EmailSender(int id, string email)
+        {
+            string filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
+            var emailAttachmentMessage = new EmailStringAttachment();
+            emailAttachmentMessage.AttachmentsFilePath.Add(filepath);
+            emailAttachmentMessage.Subject = "Білет";
+            emailAttachmentMessage.Message = "Дякуємо, що разом з нами.\n Ваш Booking.";
+            emailAttachmentMessage.EmailTo = email;
+            string Result= string.Empty;
+            var httpstatus=emailSender.SendEmail(emailAttachmentMessage);
+            if (httpstatus.HttpStatusCode.Equals(HttpStatusCode.OK))
+            {
+                Result = "Повідомлення надіслано";
+            }
+            else
+            {
+                Result = "Проблеми з сервером. Скачайте білет";
+            }
+
+            return Result;
         }
     }
 }

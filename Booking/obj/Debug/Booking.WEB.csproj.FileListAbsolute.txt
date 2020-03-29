@@ -126,3 +126,7 @@ C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\itext.pdfa.xml
 C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\itext.sign.xml
 C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\itext.styledxmlparser.xml
 C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\itext.svg.xml
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\MailKit.dll
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\MimeKit.dll
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\MailKit.xml
+C:\Users\Helen Kravchuk\source\repos\Booking.DAL\Booking\bin\MimeKit.xml
