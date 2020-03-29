@@ -28,6 +28,7 @@ namespace Booking.App_Start
             Bind<IRepository<Order>>().To<OrderRepository>();
             Bind<IRepository<Person>>().To<PeopleRepository>();
             Bind<IRepository<Ticket>>().To<TicketRepository>();
+            Bind<IRepository<ReservedSeat>>().To<ReservedSeatRepository>();
             Bind<ICityService>().To<CityService>();
             Bind<ISearchEngine<Info, SearchTrainsModel>>().To<InfoSearchEngine>();
             Bind<IBookingContext>().To<BookingContext>();
@@ -36,6 +37,10 @@ namespace Booking.App_Start
             Bind<IMapperControl>().To<MapperControl>();
             Bind<ICalculator>().To<Calculator>();
             Bind<IPriceCalculateService>().To<PriceCalculateService>();
+            Bind<IPersonService>().To<PersonService>();
+            Bind<IReservedSeatService>().To<ReservedSeatService>();
+            Bind<ITicketService>().To<TicketService>();
+            Bind<IOrderService>().To<OrderService>();
         }
     }
 }

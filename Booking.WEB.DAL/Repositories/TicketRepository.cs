@@ -64,7 +64,15 @@ namespace Booking.DAL.Repositories
 
         public Ticket Create(Ticket item)
         {
-            throw new NotImplementedException();
+            using(IDbConnection conn = _context.GetConnection())
+            {
+                int ticketId = conn.Query<int>(String.Format("INSERT INTO Ticket(Price, SeatId, RouteId) VALUES({0},{1},{2});SELECT CAST(SCOPE_IDENTITY() as int);",
+                    item.Price, item.SeatId, item.RouteId)).FirstOrDefault();
+
+                item.TicketId = ticketId;
+            }
+
+            return item;
         }
     }
 }

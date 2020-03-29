@@ -8,6 +8,7 @@ namespace Booking.WEB.DAL.Models
 {
     public class ReservedSeat
     {
+        public int SeatId { get; set; }
         public int CarriageId { get; set; }
         public int Number { get; set; }
     }

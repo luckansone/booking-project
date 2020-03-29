@@ -21,13 +21,15 @@ namespace Booking.DAL.Repositories
 
         public Person Create(Person item)
         {
-            using (IDbConnection db = _context.GetConnection())
+            string proc = "AddPerson";
+            using (IDbConnection conn = _context.GetConnection())
             {
-                var sqlQuery = "INSERT INTO Users (Name, Surname, Patronymic, DateOfBirth, Email, Phone) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                int userId = db.Query<int>(sqlQuery, item).FirstOrDefault();
-                item.PersonId = userId;
-            }
+               int userId = conn.Query<int>(proc, new { @Name = item.Name, @Surname = item.Surname, @Patronymic = item.Patronymic,
+                @DateOfBirth = item.DateOfBirth, @Email = item.Email, @Phone = item.Phone}, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
+                item.PersonId = userId;
+
+            }
             return item;
         }
 

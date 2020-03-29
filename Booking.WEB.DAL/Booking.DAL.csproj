@@ -67,6 +67,7 @@
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\PeopleRepository.cs" />
+    <Compile Include="Repositories\ReservedSeatRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
     <Compile Include="SearchEngine\InfoSearchEngine.cs" />
     <Compile Include="UnitOfWork.cs" />

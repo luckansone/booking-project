@@ -24,6 +24,8 @@ namespace Booking.WEB.Mapping
                     .ForMember("DepartureDate", opt => opt
                     .MapFrom(c => Convert.ToDateTime(c.DateOfDeparture.ToString().Replace("0:00:00", c.TimeOfDeparture))));
 
+                cfg.CreateMap<TicketViewModel, Ticket>();
+              
                 cfg.CreateMap<ReservedSeat, ReservedSeatViewModel>();
                 cfg.CreateMap<CarriageInfo, CarInfoViewModel>();
                 cfg.CreateMap<CarriageFreeSeatsInfo, CarFreeInfoViewModel>();
@@ -70,6 +72,16 @@ namespace Booking.WEB.Mapping
         public List<Person> GetPersonListByPersonViewList(List<PersonViewModel> models)
         {
             return mapper.Map<List<PersonViewModel>, List<Person>>(models);
+        }
+
+        public List<ReservedSeat> GetReservedSeatsByViewModel(List<ReservedSeatViewModel> models)
+        {
+            return mapper.Map<List<ReservedSeatViewModel>, List<ReservedSeat>>(models);
+        }
+
+        public List<Ticket> GetTicketsByViewModel(List<TicketViewModel> models)
+        {
+            return mapper.Map<List<TicketViewModel>, List<Ticket>>(models);
         }
 
     }

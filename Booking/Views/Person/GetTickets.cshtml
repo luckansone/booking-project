@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Booking.ViewModels.TicketViewModel>
+
+@{
+    ViewBag.Title = "GetTickets";
+}
+
+<br />
+<br />
+<br />
+<br />
+<h2>Замовлені білети</h2>
+<table class="table table-hover">
+    <thead class="thead-style">
+        <tr>
+            <th>
+                ФІО
+            </th>
+            <th>
+                Маршрут
+            </th>
+            <th>
+                Номер потяга
+            </th>
+            <th>
+                Номер вагона
+            </th>
+            <th>
+                Номер місця
+            </th>
+            <th>
+                Час прибуття - <br />
+                час відбуття
+            </th>
+            <th>
+                Ціна
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SNP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    №@Html.DisplayFor(modelItem => item.TrainName)
+                </td>
+                <td>
+                    №@Html.DisplayFor(modelItem => item.CarriageNumber)
+                </td>
+                <td>
+                    №@Html.DisplayFor(modelItem => item.SeatNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureTime)-<br />
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Скачати", "CreatePdf", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) <br />
+                    @Html.ActionLink("Скинути на почту", "EmailSender", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) 
+                </td>
+            </tr>
+        }
+
+</table>
