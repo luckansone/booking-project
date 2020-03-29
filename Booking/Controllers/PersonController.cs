@@ -105,5 +105,13 @@ namespace Booking.Controllers
         {
             pdfCreator.CreatePdf(ticketInfo);
         }
+
+        public FileResult Download(int id)
+        {
+            var fileName = String.Format("ticket{0}.pdf", id);
+            var filepath = String.Format(HostingEnvironment.MapPath("/App_Data/ticket{0}.pdf"), id);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
+            return File(fileBytes, "application/pdf", fileName);
+        }
     }
 }

@@ -67,7 +67,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Скачати", "", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) <br />
+                    @Html.ActionLink("Скачати", "Download", new { id= item.SeatId}, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) <br />
                     @Html.ActionLink("Скинути на почту", "EmailSender", new { /* id=item.PrimaryKey */ }, new { @class ="btn btn-primary btn-lg btn-block fixedbuttonsize"}) 
                 </td>
             </tr>
