@@ -15,13 +15,14 @@ namespace Booking.Controllers
     public class PersonController : Controller
     {
         private readonly IMapperControl mapperControl;
-        private List<PersonViewModel> personViewModels;
         private readonly IPersonService personService;
         private readonly IReservedSeatService reservedSeatService;
         private readonly IOrderService orderService;
         private readonly ITicketService ticketService;
         private readonly IPdfCreator pdfCreator;
         private readonly IEmailSender emailSender;
+
+        private List<PersonViewModel> personViewModels;
 
         List<TicketViewModel> ticketViewModels;
         public PersonController( IMapperControl mapperControl, IPersonService personService,

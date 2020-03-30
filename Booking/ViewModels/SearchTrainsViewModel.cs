@@ -32,15 +32,27 @@ namespace Booking.WEB.ViewModels
 
         public SearchTrainsViewModel()
         {
-            List<string> timeRange = new List<string>
-            {
-                "12:00:00",
-                "15:00:00",
-                "18:00:00"
-            };
-
-            times = new SelectList(timeRange);
+            times = new SelectList(InitializeTimeRange());
         }
+
+        private static List<string> InitializeTimeRange()
+        {
+            List<string> timeRange = new List<string>();
+
+            for(int i = 0; i <= 9; i++)
+            {
+                timeRange.Add(String.Format("0{0}:00:00", i));
+            }
+
+            for(int i = 10; i < 24; i++)
+            {
+                timeRange.Add(String.Format("{0}:00:00", i));
+            }
+
+            return timeRange;
+        }
+
+        
 
       
     }
